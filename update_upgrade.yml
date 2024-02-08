@@ -1,6 +1,6 @@
 ---
 - name: Atualizar e fazer upgrade dos pacotes
-  hosts: seu_host
+  hosts: all
   become: true
   gather_facts: true
   vars:
