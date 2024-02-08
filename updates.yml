@@ -7,10 +7,18 @@
     ansible_python_interpreter: /usr/bin/python3
 
   tasks:
+    - name: Corrigir dependências quebradas
+      apt:
+        name: ''
+        state: latest
+        update_cache: yes
+        force_apt_get: yes
+      become: true
+
+  tasks:
     - name: Atualizar lista de pacotes
       apt:
         update_cache: yes
-        upgrade: 'yes'
 
     - name: Verificar atualizações disponíveis
       apt:
