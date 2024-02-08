@@ -1,6 +1,18 @@
-- hosts: all
-  gather_facts: yes
-  become: yes
+---
+- name: Verificar atualizações no sistema
+  hosts: all
+  become: true
 
-  roles:
-    - { role: AdnanHodzic.system-upgrade }
+  tasks:
+    - name: Atualizar lista de pacotes
+      apt:
+        update_cache: yes
+
+    - name: Verificar atualizações disponíveis
+      apt:
+        upgrade: yes
+      register: result
+
+    - name: Exibir atualizações disponíveis
+      debug:
+        var: result.stdout_lines
