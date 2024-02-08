@@ -1,8 +1,8 @@
 ---
 - name: Verificar atualizações no sistema
   hosts: all
-  become: 'True'
-  gather_facts: 'True'
+  become: true
+  gather_facts: true
   vars:
     ansible_python_interpreter: /usr/bin/python3
 
