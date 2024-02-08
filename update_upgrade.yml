@@ -13,4 +13,4 @@
 
     - name: Fazer upgrade dos pacotes
       apt:
-        upgrade: yes
+        upgrade: 'yes'
