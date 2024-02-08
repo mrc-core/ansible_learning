@@ -1,7 +1,10 @@
 ---
 - name: Verificar atualizações no sistema
   hosts: all
-  become: true
+  become: 'True'
+  gather_facts: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
 
   tasks:
     - name: Atualizar lista de pacotes
