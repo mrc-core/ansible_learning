@@ -1,0 +1,15 @@
+---
+- name: Atualizar e fazer upgrade dos pacotes
+  hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+    - name: Atualizar lista de pacotes e efectua upgrade dos pacotes
+      apt:
+        state: latest
+        update_cache: yes
+        upgrade: yes
+        cache_valid_time: 86400 
