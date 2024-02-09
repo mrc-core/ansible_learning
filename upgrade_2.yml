@@ -1,6 +1,6 @@
 ---
 - name: Atualizar e fazer upgrade dos pacotes
-  hosts: 10.50.110.2
+  hosts: all
   become: true
   gather_facts: true
   vars:
