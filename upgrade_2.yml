@@ -10,6 +10,6 @@
     - name: Atualizar lista de pacotes e efectua upgrade dos pacotes
       apt:
         state: latest
-        update_cache: yes
-        upgrade: yes
+        update_cache: 'yes'
+        upgrade: 'yes'
         cache_valid_time: 86400 
