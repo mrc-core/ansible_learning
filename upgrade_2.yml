@@ -1,15 +1,33 @@
+# Este playbook do Ansible atualiza e faz upgrade dos pacotes num grupo de servidores Ubuntu. 
+# Conecta-se ao grupo 'servidores' e executa tarefas como utilizador sudo para escalonamento de privilégios. 
+# O playbook começa por atualizar as listas de pacotes nos servidores usando o módulo 'apt'. 
+# Em seguida, realiza um upgrade de distribuição, removendo quaisquer pacotes não utilizados e limpando a cache de pacotes. 
+# Certifique-se de ter acesso SSH e permissões adequadas configuradas para executar as tarefas.
+
 ---
 - name: Atualizar e fazer upgrade dos pacotes
   hosts: all
-  become: true
-  gather_facts: true
+  gather_facts: yes  
+  become: yes
+  become_method: sudo
   vars:
     ansible_python_interpreter: /usr/bin/python3
 
+  vars_prompt:
+    - name: "ansible_become_password"
+      prompt: "Enter sudo password"
+      private: yes
+
   tasks:
-    - name: Atualizar lista de pacotes e efectua upgrade dos pacotes
+    - name: Atualizar a lista de pacotes.
       apt:
-        state: latest
         update_cache: yes
+
+    - name: Upgrade dos pacotes.
+      apt:
         upgrade: dist
-        cache_valid_time: 86400 
+
+    - name: Remover dependências que já não são necessárias.
+      apt:
+        autoremove: yes
+        autoclean: yes
